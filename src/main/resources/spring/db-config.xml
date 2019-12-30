@@ -12,6 +12,8 @@
         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd
         http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
+    <context:property-placeholder location="classpath:application.properties" ignore-resource-not-found="true"/>
+
     <bean id="dbDataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close"
           p:url="${db.url}"
           p:username="${db.username}"
@@ -32,6 +34,7 @@
           p:connectionInitSqls="set names utf8mb4"
           p:filters="stat,config">
     </bean>
-    <bean id="dbSqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean" p:dataSource-ref="dbDataSource" p:mapperLocations="classpath*:mybatis/*/*.xml"/>
+    <bean id="dbSqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean" p:dataSource-ref="dbDataSource"
+          p:mapperLocations="classpath*:mybatis/*/*.xml"/>
     <bean id="dbMybatisTemplate" class="org.mybatis.spring.SqlSessionTemplate" c:_0-ref="dbSqlSessionFactory"/>
 </beans>
